@@ -1,7 +1,7 @@
 package com.rezolt.Nifty;
 
 public class Config {
-    public static String token = "NDUyNTEzNTU1MTQ1NTU1OTc4.DfRboQ.tXghbuSJSLIKJMKagLUI5Q0Gqck";
+    public static String token = "Nah boi!";
     public static String prefix = "n!";
     public static String serverID = "452511637602304073";
     public static String reportChannelID = "452724115636486146";

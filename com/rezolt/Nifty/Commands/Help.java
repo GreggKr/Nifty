@@ -4,14 +4,14 @@ import com.rezolt.Nifty.Commands.Handler.Command;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class Help extends Command
+public class Help implements Command
 {
     @Override
     public String getName()
@@ -30,15 +30,22 @@ public class Help extends Command
     {
         return Arrays.asList("?", "commands", "list");
     }
+
     @Override
-    public void execute(MessageReceivedEvent event, String[] args, User author, Message m, Guild g)
+    public String getFormat() { return "help";}
+
+    @Override
+    public void execute(Message m, String[] args)
     {
+        Guild g = m.getGuild();
+        User author = m.getAuthor();
+        MessageChannel channel = m.getChannel();
         EmbedBuilder eb = new EmbedBuilder();
         eb.setTitle("Coming Soon!");
         eb.setColor(Color.decode("#12CBC4"));
         eb.setAuthor(author.getName(), author.getAvatarUrl(), author.getAvatarUrl());
 
-        event.getChannel().sendMessage(eb.build()).queue();
+        channel.sendMessage(eb.build()).queue();
 
     }
 }

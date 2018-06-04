@@ -33,7 +33,7 @@ public class CommandHandler
                 aliases.forEach(a -> {
                     if(args[0].equalsIgnoreCase(Config.prefix + a))
                     {
-                        cmd.execute(event, args, event.getAuthor(), event.getMessage(), event.getGuild());
+                        cmd.execute(event.getMessage(), args);
                         return;
                     }
                     ;

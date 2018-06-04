@@ -3,11 +3,7 @@ package com.rezolt.Nifty.Utils;
 import com.rezolt.Nifty.Commands.Handler.Command;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.Permission;
-import net.dv8tion.jda.core.entities.Guild;
-import net.dv8tion.jda.core.entities.Member;
-import net.dv8tion.jda.core.entities.MessageChannel;
-import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.entities.*;
 
 import java.awt.*;
 
@@ -32,16 +28,19 @@ public class Messages
         eb.setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png");
         channel.sendMessage(eb.build()).queue();
     }
-    public static void canInteractError(User a1, User a2, Guild guild, MessageReceivedEvent event)
+
+    public static void canInteractError(User a1, User a2, Guild guild, Message m)
     {
         if(guild.getMember(a1).canInteract(guild.getMember(a2)))
+        {
             return;
+        }
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.decode("#EA2027"));
         eb.setTitle("Invalid Permissions!");
         eb.setDescription(guild.getMember(a1).getEffectiveName() + " you cannot interact with " + guild.getMember(a2).getEffectiveName());
-        eb.setFooter("Caused by " + event.getMember().getEffectiveName(), guild.getSelfMember().getUser().getAvatarUrl());
+        eb.setFooter("Caused by " + guild.getMember(m.getAuthor()).getEffectiveName(), guild.getSelfMember().getUser().getAvatarUrl());
         eb.setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png");
-        event.getChannel().sendMessage(eb.build()).queue();
+        m.getChannel().sendMessage(eb.build()).queue();
     }
 }

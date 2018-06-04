@@ -5,14 +5,14 @@ import com.rezolt.Nifty.Utils.Messages;
 import net.dv8tion.jda.core.Permission;
 import net.dv8tion.jda.core.entities.Guild;
 import net.dv8tion.jda.core.entities.Message;
+import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-public class Kill extends Command
+public class Kill implements Command
 {
     @Override
     public String getName()
@@ -37,12 +37,15 @@ public class Kill extends Command
         return "kill (User))";
     }
     @Override
-    public void execute(MessageReceivedEvent event, String[] args, User author, Message m, Guild g)
+    public void execute(Message m, String[] args)
     {
-        User mu = m.getMentionedUsers().get(0);
+        Guild g = m.getGuild();
+        User author = m.getAuthor();
+        MessageChannel channel = m.getChannel();
+        User  mu = m.getMentionedUsers().get(0);
         if(mu == null)
         {
-            Messages.error(g,Permission.UNKNOWN,new Kill(),g.getMember(author),args,event.getChannel());
+            Messages.error(g,Permission.UNKNOWN,new Kill(),g.getMember(author),args,channel);
             return;
         }
         Random rand = new Random();
@@ -58,6 +61,6 @@ public class Kill extends Command
                         "%d%'s eyes were spooned out out by %k%",
                         "%k% summoned a demon on %d%..."
                 };
-        event.getChannel().sendMessage(deaths[i].replaceAll("%k%", g.getMember(author).getEffectiveName()).replaceAll("%d%", g.getMember(mu).getEffectiveName())).queue();
+        channel.sendMessage(deaths[i].replaceAll("%k%", g.getMember(author).getEffectiveName()).replaceAll("%d%", g.getMember(mu).getEffectiveName())).queue();
     }
 }
