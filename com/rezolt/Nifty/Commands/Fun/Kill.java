@@ -34,7 +34,7 @@ public class Kill implements Command
     @Override
     public String getFormat()
     {
-        return "kill (User))";
+        return "kill (User)";
     }
     @Override
     public void execute(Message m, String[] args)
@@ -42,24 +42,42 @@ public class Kill implements Command
         Guild g = m.getGuild();
         User author = m.getAuthor();
         MessageChannel channel = m.getChannel();
-        User  mu = m.getMentionedUsers().get(0);
+        User mu = null;
+        if(!m.getMentionedUsers().isEmpty()) {
+            mu = m.getMentionedUsers().get(0);
+        }
         if(mu == null)
         {
             Messages.error(g,Permission.UNKNOWN,new Kill(),g.getMember(author),args,channel);
             return;
         }
         Random rand = new Random();
-        int i = rand.nextInt(7);
+        int i = rand.nextInt(21); //Exact number of death messages
         String[] deaths =
                 {
                         "%k% stabbed %d% with a pitchfork!",
                         "%d% thrown under a bus by %k%",
-                        "%k% slapped %d% with a magical dildo",
                         "%k% blasted %d% with a raygun!",
                         "%k% threw acid in %d%'s face!",
                         "%d% was stabbed by %k% with a butter knife",
                         "%d%'s eyes were spooned out out by %k%",
-                        "%k% summoned a demon on %d%..."
+                        "%k% summoned a demon on %d%...",
+                        "%k% drowned %d%",
+                        "%k% shoved %d% off a cliff!",
+                        "%k% Strangled %d% to death",
+                        "%d% fell off of a cliff",
+                        "%d% slipped on a banana peel!",
+                        "%k% poisoned %d%'s coffee...",
+                        "%d%'s parachute failed",
+                        "%d% tried to bench press too much!",
+                        "%d% fell into a volcano",
+                        "%d% was killed by a feral cat!",
+                        "%d%'s gun back fired...",
+                        "%d% was kicked by a horse",
+                        "%d% dived in the shallow end of the pool",
+                        "%d% fell off the space needle",
+                        "%k% jumped on %d%'s head!"
+
                 };
         channel.sendMessage(deaths[i].replaceAll("%k%", g.getMember(author).getEffectiveName()).replaceAll("%d%", g.getMember(mu).getEffectiveName())).queue();
     }
