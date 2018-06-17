@@ -30,6 +30,9 @@ public class Changelog implements Command {
     public String getFormat() { return "changelog, (Version), {Changes}";}
 
     @Override
+    public String getCatagory() {return "BotOwner";}
+
+    @Override
     public void execute(Message m, String[] args) {
         String[] changes = m.getContentRaw().split(",");
         boolean owner = false;

@@ -1,5 +1,6 @@
 package com.rezolt.Nifty.Commands.User;
 
+import com.rezolt.Nifty.Commands.Fun.Kill;
 import com.rezolt.Nifty.Commands.Handler.Command;
 import com.rezolt.Nifty.Config;
 import com.rezolt.Nifty.Utils.Messages;
@@ -39,6 +40,8 @@ public class Suggest implements Command
     {
         return "suggest (idea) | (Description)";
     }
+    @Override
+    public String getCatagory(){return "user";}
 
     @Override
     public void execute(Message m, String[] args)
@@ -70,7 +73,7 @@ public class Suggest implements Command
         }
         else
         {
-            Messages.error(g, Permission.UNKNOWN, new Suggest(), g.getMember(author), args, channell);
+            Messages.error(Permission.UNKNOWN, m, args, new Suggest());
         }
     }
 }

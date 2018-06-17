@@ -14,5 +14,7 @@ public interface Command
 
     public List<String> getUsage();
 
+    public String getCatagory();
+
     public void execute(Message m, String[] args);
 }

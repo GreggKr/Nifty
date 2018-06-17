@@ -33,6 +33,10 @@ public class Ban implements Command
         return "ban (user) [reason] | [time]";
     }
     @Override
+    public String getCatagory(){return "moderation";}
+    @Override
+
+    //TODO: More effective ban command
     public void execute(Message m, String[] args)
     {
         Guild g = m.getGuild();
@@ -41,7 +45,7 @@ public class Ban implements Command
         Member user = null;
         Member a = g.getMember(author);
         if(m.getMentionedUsers().isEmpty())
-            Messages.error(g,Permission.UNKNOWN,new Ban(),a,args, channel);
+            Messages.error(Permission.UNKNOWN, m, args, new Ban());
         else
         {
             user = g.getMember(m.getMentionedUsers().get(0));
@@ -84,7 +88,7 @@ public class Ban implements Command
                 }
                 else
                 {
-                    Messages.error(g,Permission.BAN_MEMBERS, new Ban(), a, args, channel);
+                    Messages.error(Permission.BAN_MEMBERS, m, args, new Ban());
 
                 }
             }

@@ -37,6 +37,8 @@ public class Kill implements Command
         return "kill (User)";
     }
     @Override
+    public String getCatagory(){return "fun";}
+    @Override
     public void execute(Message m, String[] args)
     {
         Guild g = m.getGuild();
@@ -48,7 +50,7 @@ public class Kill implements Command
         }
         if(mu == null)
         {
-            Messages.error(g,Permission.UNKNOWN,new Kill(),g.getMember(author),args,channel);
+            Messages.error(Permission.UNKNOWN, m, args, new Kill());
             return;
         }
         Random rand = new Random();

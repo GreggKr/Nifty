@@ -1,4 +1,4 @@
-package com.rezolt.Nifty.Commands.User;
+package com.rezolt.Nifty.Commands;
 
 import com.rezolt.Nifty.Commands.Handler.Command;
 import net.dv8tion.jda.core.EmbedBuilder;
@@ -11,32 +11,30 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class Support implements Command
+public class Help implements Command
 {
     @Override
     public String getName()
     {
-        return "Support";
+        return "Help";
     }
 
     @Override
     public String getDescription()
     {
-        return "Helps you get support";
+        return "Shows all of the commands!";
     }
 
     @Override
     public List<String> getUsage()
     {
-        return Arrays.asList("server", "join");
+        return Arrays.asList("?", "commands", "list");
     }
-
 
     @Override
-    public String getFormat()
-    {
-        return "support";
-    }
+    public String getFormat() { return "help";}
+    @Override
+    public String getCatagory() { return "user";}
     @Override
     public void execute(Message m, String[] args)
     {
@@ -44,13 +42,11 @@ public class Support implements Command
         User author = m.getAuthor();
         MessageChannel channel = m.getChannel();
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setTitle("Support!");
-        eb.setAuthor("Join Here!", "https://discord.gg/etdC226", g.getSelfMember().getUser().getAvatarUrl());
-        eb.setThumbnail("https://www.ptc.com/-/media/Images/Redesign/support/ReactivateGS-CTA.png");
-        eb.setDescription("Need help with me? Join out support server now! Talk with our support team and get any issues resolved within minutes!");
-        eb.setColor(Color.decode("#A3CB38"));
-        eb.setFooter("Report bugs with n!report", g.getSelfMember().getUser().getAvatarUrl());
-        channel.sendMessage(eb.build()).queue();
-    }
+        eb.setTitle("Coming Soon!");
+        eb.setColor(Color.decode("#12CBC4"));
+        eb.setAuthor(author.getName(), author.getAvatarUrl(), author.getAvatarUrl());
 
+        channel.sendMessage(eb.build()).queue();
+
+    }
 }
