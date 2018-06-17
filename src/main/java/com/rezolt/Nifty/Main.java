@@ -2,6 +2,7 @@ package com.rezolt.Nifty;
 
 import com.rezolt.Nifty.Commands.Admin.Ban;
 import com.rezolt.Nifty.Commands.Fun.Kill;
+import com.rezolt.Nifty.Commands.Fun.RPS;
 import com.rezolt.Nifty.Commands.Handler.CommandHandler;
 import com.rezolt.Nifty.Commands.Help;
 import com.rezolt.Nifty.Commands.User.Report;
@@ -41,5 +42,6 @@ public class Main
         ch.registerCommand(new Report());
         ch.registerCommand(new Suggest());
         ch.registerCommand(new Kill());
+        ch.registerCommand(new RPS());
     }
 }
