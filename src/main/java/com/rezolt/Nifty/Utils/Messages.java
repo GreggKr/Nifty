@@ -9,10 +9,13 @@ import java.awt.*;
 
 public class Messages
 {
-    public static void error(Guild g, Permission p, Command c, Member m, String[] args, MessageChannel channel)
+    public static void error(Permission p, Message me, String[] args, Command c)
     {
         EmbedBuilder eb = new EmbedBuilder();
         eb.setColor(Color.decode("#EA2027"));
+        Guild g = me.getGuild();
+        Member m = g.getMember(me.getAuthor());
+        MessageChannel channel = me.getChannel();
         if(!m.hasPermission(p))
         {
             eb.setTitle("Insuffecient Permissions!");
@@ -39,6 +42,17 @@ public class Messages
         eb.setColor(Color.decode("#EA2027"));
         eb.setTitle("Invalid Permissions!");
         eb.setDescription(guild.getMember(a1).getEffectiveName() + " you cannot interact with " + guild.getMember(a2).getEffectiveName());
+        eb.setFooter("Caused by " + guild.getMember(m.getAuthor()).getEffectiveName(), guild.getSelfMember().getUser().getAvatarUrl());
+        eb.setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png");
+        m.getChannel().sendMessage(eb.build()).queue();
+    }
+    public static void botOwnerOnly(Message m)
+    {
+        EmbedBuilder eb = new EmbedBuilder();
+        Guild guild = m.getGuild();
+        eb.setColor(Color.decode("#EA2027"));
+        eb.setTitle("Invalid Permissions!");
+        eb.setDescription(m.getAuthor().getName() + " you must be my owner to use this command!");
         eb.setFooter("Caused by " + guild.getMember(m.getAuthor()).getEffectiveName(), guild.getSelfMember().getUser().getAvatarUrl());
         eb.setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png");
         m.getChannel().sendMessage(eb.build()).queue();
