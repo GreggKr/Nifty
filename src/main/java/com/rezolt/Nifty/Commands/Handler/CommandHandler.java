@@ -5,6 +5,7 @@ import net.dv8tion.jda.core.entities.MessageType;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CommandHandler
@@ -19,6 +20,11 @@ public class CommandHandler
     public void registerCommand(Command cmd)
     {
         registeredCommands.add(cmd);
+    }
+
+    public void registerCommands(Command... commands)
+    {
+        Arrays.stream(commands).forEach(this::registerCommand);
     }
 
     public void handle(MessageReceivedEvent event)

@@ -34,14 +34,14 @@ public class Main
                 .buildBlocking();
     }
 
-    protected static void registerCommands()
+    private static void registerCommands()
     {
-        ch.registerCommand(new Help());
-        ch.registerCommand(new Ban());
-        ch.registerCommand(new Support());
-        ch.registerCommand(new Report());
-        ch.registerCommand(new Suggest());
-        ch.registerCommand(new Kill());
-        ch.registerCommand(new RPS());
+        ch.registerCommands(new Help(),
+                new Ban(),
+                new Support(),
+                new Report(),
+                new Suggest(),
+                new Kill(),
+                new RPS());
     }
 }
